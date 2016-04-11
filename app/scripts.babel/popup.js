@@ -1,3 +1,7 @@
 'use strict';
 
-console.log('\'Allo \'Alo! Popup');
+var bg = chrome.extension.getBackgroundPage();
+
+// TODO
+// Add enabled + disabled
+// add servers

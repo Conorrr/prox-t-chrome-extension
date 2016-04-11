@@ -2,12 +2,46 @@
 
 var requestPattern = "http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8";
 
+var enabled = false;
+var servers = {
+	"London": "lon.restall.io:5050",
+	"Miami": "mia.restall.io:5050",
+	"Sydney": "syd.restall.io:5050",
+	"localhost": "localhost:5050"
+};
+var server = "london";
+
+
+var enable = function() {
+	enabled = true;
+}
+
+var disable = function() {
+	enabled = false;
+}
+
+var getStatus = function() {
+	return enabled;
+}
+
+var getServers = function() {
+	return servers;
+}
+
+var setServer = function(newServer) {
+	server = newServer;
+}
+
+
+
+// Private internals
+
 var getPair = function(str) {
 	return str.split("=");
 }
 
 var buildUrl = function(steamerName, params) {
-	return "http://162.243.99.47/usher.ttvnw.net/api/channel/hls/" + steamerName + ".m3u8?" + buildParamString(params);
+	return "http://" + servers[server] + "/init/" + steamerName + ".m3u8?" + buildParamString(params);
 }
 
 var buildParamString = function(params) {
@@ -22,13 +56,16 @@ var buildParamString = function(params) {
 // redirect request
 var callback = function(request) {
 
+	if (!enabled) {
+		return;
+	}
+
 	if (!request.url.match(requestPattern)) {
 		return;
 	}
 	var parts = request.url.split("&");
 
 	var nameAndToken = parts[0].substring(parts[0].lastIndexOf("/") + 1, parts[0].length).split("?");
-	// es6 [name, token] = nameAndToken ??
 	var name = nameAndToken[0].slice(0, -5);
 	var props = {
 		"token": nameAndToken[1].substring(6)
