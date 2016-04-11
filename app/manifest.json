@@ -1,0 +1,33 @@
+{
+  "name": "Prox-t Prototype 2",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Proto type to test UI & yo chrome-extension",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "bower_components/jquery/dist/jquery.min.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "*://www.twitch.tv/*",
+    "http://*.ttvnw.net/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "prox t_proto_2",
+    "default_popup": "popup.html"
+  }
+}
