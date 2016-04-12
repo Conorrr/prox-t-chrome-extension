@@ -5,9 +5,18 @@
     <link href="styles/main.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Prox-t</h1>
-    <div id="status"></div>
-    <!-- todo create a render script so that contentis always right on first render?? -->
+    <div id="title">
+      Prox-t
+    </div>
+    <div id="statusCont" class="row">
+      <div class="label">Status:</div>
+      <div id="status"></div>
+    </div>
+    <div id="serverContainer" class="row">
+      <div class="label">Server:</div>
+      <select id="servers"></select>
+    </div>
+    <a id="enableButton"></a>
     <script src="scripts/popup.js"></script>
   </body>
 </html>

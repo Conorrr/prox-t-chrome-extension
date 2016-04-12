@@ -4,14 +4,16 @@
   "manifest_version": 2,
   "description": "Proto type to test UI & yo chrome-extension",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "images/Logo_16.png",
+    "32": "images/Logo_32.png",
+    "64": "images/Logo_64.png",
+    "128": "images/Logo_128.png",
+    "256": "images/Logo_256.png"
   },
   "default_locale": "en",
   "background": {
     "scripts": [
-      "scripts/background.js",
-      "bower_components/jquery/dist/jquery.min.js"
+      "scripts/background.js"
     ]
   },
   "permissions": [
@@ -24,8 +26,8 @@
   ],
   "browser_action": {
     "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
+      "19": "images/Logo_19.png",
+      "38": "images/Logo_38.png"
     },
     "default_title": "prox t_proto_2",
     "default_popup": "popup.html"
