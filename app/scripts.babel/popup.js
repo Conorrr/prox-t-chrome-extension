@@ -11,6 +11,7 @@ var initialRender = function() {
 	var serversSelect = document.getElementById('servers');
 	var servers = bg.getServers();
 	var currentServer = bg.getCurrentServer();
+	serversSelect.appendChild(generateOption('Select a region', false));
 	for (var key in servers) {
 		var selected = key == currentServer;
 		serversSelect.appendChild(generateOption(key, selected));
@@ -38,7 +39,7 @@ document.getElementById('enableButton').addEventListener('click', function() {
 		bg.disable();
 		redraw();
 	} else {
-		bg.enable();
+		bg.enable();		
 		redraw();
 	}
 });

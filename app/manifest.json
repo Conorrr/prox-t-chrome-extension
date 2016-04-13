@@ -1,8 +1,8 @@
 {
-  "name": "Prox-t Prototype 2",
-  "version": "0.0.1",
+  "name": "Prox-t Beta",
+  "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Proto type to test UI & yo chrome-extension",
+  "description": "Enables users to switch to using a different twitch proxy",
   "icons": {
     "16": "images/Logo_16.png",
     "32": "images/Logo_32.png",
@@ -17,6 +17,7 @@
     ]
   },
   "permissions": [
+    "tabs",
     "activeTab",
     "webRequest",
     "webRequestBlocking",
@@ -24,12 +25,12 @@
     "*://www.twitch.tv/*",
     "http://*.ttvnw.net/*"
   ],
-  "browser_action": {
+  "page_action": {
     "default_icon": {
       "19": "images/Logo_19.png",
       "38": "images/Logo_38.png"
     },
-    "default_title": "prox t_proto_2",
+    "default_title": "Prox-t Beta",
     "default_popup": "popup.html"
   }
 }
