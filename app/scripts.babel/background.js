@@ -5,7 +5,10 @@
 let asTab = (() => {
   let requestPattern = 'http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
 
-  let defaultServer = 'London';
+  let defaultServer = '';
+
+  const enabledIconImage = 'images/Logo_38_active.png';
+  const disabledIconImage = 'images/Logo_38.png';
 
   // {tabId:{enabled:t/f, server:'London'}, ...}
   let status = {};
@@ -13,7 +16,7 @@ let asTab = (() => {
   let servers = {
     'London': 'lon.restall.io:5050',
     'Miami': 'mia.restall.io:5050',
-    'Silicon Valley': 'svy.restall.io:5050',
+    'San Jose': 'svy.restall.io:5050',
     'Sydney': 'syd.restall.io:5050',
     'localhost': 'localhost:5050'
   };
@@ -21,13 +24,17 @@ let asTab = (() => {
   let methods = function(tabId) {
     return {
       enable: () => {
-        status[tabId].enabled = true;
-        restartTwitchVideo(tabId);
+        if (status[tabId].server != '') {
+          status[tabId].enabled = true;
+          restartTwitchVideo(tabId);
+          changeIcon(tabId, enabledIconImage);
+        }
       },
 
       disable: () => {
         status[tabId].enabled = false;
         restartTwitchVideo(tabId);
+        changeIcon(tabId, disabledIconImage);
       },
 
       getStatus: () => {
@@ -40,8 +47,7 @@ let asTab = (() => {
 
       setServer: (newServer) => {
         status[tabId].server = newServer;
-
-        if (enabled) {
+        if (status[tabId].enabled && newServer != '') {
           restartTwitchVideo(tabId);
         }
       },
@@ -54,6 +60,13 @@ let asTab = (() => {
       }
     }
   };
+
+  let changeIcon = function(tabId, image) {
+    chrome.pageAction.setIcon({
+      path: image,
+      tabId: tabId
+    });
+  }
 
   let asTab = (tabId) => {
     if (!status[tabId]) {
@@ -85,7 +98,6 @@ let asTab = (() => {
   }
 
 
-
   let restartCurrentTwitchTab = function() {
     chrome.tabs.query({
       active: true
@@ -100,7 +112,7 @@ let asTab = (() => {
     let code = 'document.getElementsByClassName(\'player-button--playpause\')[0].click();setTimeout(function(){ document.getElementsByClassName(\'player-button--playpause\')[0].click(); }, 1000);';
     chrome.tabs.executeScript(tabId, {
       code: code
-    }, function() {});
+    });
   }
 
 
@@ -108,7 +120,7 @@ let asTab = (() => {
   let callback = function(request) {
     let tabId = request.tabId;
 
-    if (!status[tabId].enabled) {
+    if (status[tabId] === undefined || !status[tabId].enabled) {
       return;
     }
 
@@ -153,5 +165,22 @@ let asTab = (() => {
     }
   });
 
-  return asTab
+  chrome.runtime.onInstalled.addListener(function(details) {
+    if (details.reason == 'install') {
+      activateOnTwitchTabs();
+    } else if (details.reason == 'update') {
+      activateOnTwitchTabs();
+      var thisVersion = chrome.runtime.getManifest().version;
+    }
+  });
+
+  let activateOnTwitchTabs = function() {
+    chrome.tabs.query({
+      url: 'https://www.twitch.tv/*'
+    }, function(tabs) {
+      tabs.forEach((tab) => chrome.pageAction.show(tab.id));
+    });
+  }
+
+  return asTab;
 })();

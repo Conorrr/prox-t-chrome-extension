@@ -2,7 +2,7 @@
   "name": "Prox-t Beta",
   "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Enables users to switch to using a different twitch proxy",
+  "description": "Enables users to switch to using a different twitch data center.",
   "icons": {
     "16": "images/Logo_16.png",
     "32": "images/Logo_32.png",

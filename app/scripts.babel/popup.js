@@ -16,17 +16,17 @@ chrome.tabs.query({
 		var serversSelect = document.getElementById('servers');
 		var servers = bg.getServers();
 		var currentServer = bg.getCurrentServer();
-		serversSelect.appendChild(generateOption('Select a region', false));
+		serversSelect.appendChild(generateOption('', 'Select a region', false));
 		for (var key in servers) {
 			var selected = key == currentServer;
-			serversSelect.appendChild(generateOption(key, selected));
+			serversSelect.appendChild(generateOption(key, key, selected));
 		}
 	}
 
-	var generateOption = function(name, selected) {
+	var generateOption = function(key, text, selected) {
 		var option = document.createElement('option');
-		option.text = name;
-		option.value = name;
+		option.value = key;
+		option.text = text;
 		if (selected) {
 			option.selected = 'selected';
 		}
