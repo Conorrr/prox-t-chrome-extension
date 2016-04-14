@@ -1,7 +1,5 @@
 'use strict';
 
-
-//once it's working change to let [getServers,asTab] = {...} // see IIFE
 let asTab = (() => {
   let requestPattern = 'http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
 
@@ -79,8 +77,6 @@ let asTab = (() => {
     return methods(tabId);
   }
 
-  // Private internals
-
   let getPair = function(str) {
     return str.split('=');
   }
@@ -97,16 +93,6 @@ let asTab = (() => {
     return out.join('&');
   }
 
-
-  let restartCurrentTwitchTab = function() {
-    chrome.tabs.query({
-      active: true
-    }, function(tabs) {
-      // problem with mutliple windows -> if there are multiple windows there are multiple active tabs
-      restartTwitchVideo(tabs[0].id);
-    });
-  }
-
   let restartTwitchVideo = function(tabId) {
     // this is really hacky, once i get time i will replace this with a nicer way to restart videos
     let code = 'document.getElementsByClassName(\'player-button--playpause\')[0].click();setTimeout(function(){ document.getElementsByClassName(\'player-button--playpause\')[0].click(); }, 1000);';
@@ -115,8 +101,14 @@ let asTab = (() => {
     });
   }
 
+  let activateOnTwitchTabs = function() {
+    chrome.tabs.query({
+      url: 'https://www.twitch.tv/*'
+    }, function(tabs) {
+      tabs.forEach((tab) => chrome.pageAction.show(tab.id));
+    });
+  }
 
-  // redirect request
   let callback = function(request) {
     let tabId = request.tabId;
 
@@ -136,7 +128,6 @@ let asTab = (() => {
       'token': nameAndToken[1].substring(6)
     };
 
-    // extract parts
     for (let i = 1; i < parts.length; i++) {
       let keyPair = getPair(parts[i]);
       props[keyPair[0]] = keyPair[1];
@@ -173,14 +164,6 @@ let asTab = (() => {
       var thisVersion = chrome.runtime.getManifest().version;
     }
   });
-
-  let activateOnTwitchTabs = function() {
-    chrome.tabs.query({
-      url: 'https://www.twitch.tv/*'
-    }, function(tabs) {
-      tabs.forEach((tab) => chrome.pageAction.show(tab.id));
-    });
-  }
 
   return asTab;
 })();

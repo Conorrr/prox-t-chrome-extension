@@ -1,5 +1,6 @@
 // generated on 2016-04-10 using generator-chrome-extension 0.5.6
 import gulp from 'gulp';
+import util from "gulp-util";
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import runSequence from 'run-sequence';
@@ -50,8 +51,18 @@ gulp.task('images', () => {
     .pipe(gulp.dest('dist/images'));
 });
 
+gulp.task('css',  () => {
+  return gulp.src(['app/styles/*.css'])
+    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    .pipe($.sourcemaps.init())
+    .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
+    .pipe($.sourcemaps.write())
+    .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
+    .pipe(gulp.dest('dist/styles'));
+});
+
 gulp.task('html',  () => {
-  return gulp.src('app/*.html')
+  return gulp.src(['app/*.html'])
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
     .pipe($.if('*.js', $.uglify()))
@@ -119,14 +130,14 @@ gulp.task('wiredep', () => {
 gulp.task('package', function () {
   var manifest = require('./dist/manifest.json');
   return gulp.src('dist/**')
-      .pipe($.zip('prox t_proto_2-' + manifest.version + '.zip'))
+      .pipe($.zip('prox t-' + manifest.version + '.zip'))
       .pipe(gulp.dest('package'));
 });
 
 gulp.task('build', (cb) => {
   runSequence(
     'lint', 'babel', 'chromeManifest',
-    ['html', 'images', 'extras'],
+    ['html', 'images', 'css', 'extras'],
     'size', cb);
 });
 
