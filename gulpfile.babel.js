@@ -62,7 +62,7 @@ gulp.task('css',  () => {
 });
 
 gulp.task('html',  () => {
-  return gulp.src(['app/*.html'])
+  return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
     .pipe($.if('*.js', $.uglify()))
@@ -79,7 +79,7 @@ gulp.task('chromeManifest', () => {
       background: {
         target: 'scripts/background.js',
         exclude: [
-          'scripts/chromereload.js'
+          // 'scripts/chromereload.js'
         ]
       }
   }))
@@ -88,6 +88,17 @@ gulp.task('chromeManifest', () => {
   .pipe($.if('*.js', $.uglify()))
   .pipe($.if('*.js', $.sourcemaps.write('.')))
   .pipe(gulp.dest('dist'));
+});
+
+gulp.task('js', () => {
+  return gulp.src([
+    'app/scripts.babel/*.js',
+    '!app/scripts.babel/background.js',
+    '!app/scripts.babel/chromereload.js'])
+  .pipe($.if('*.js', $.sourcemaps.init()))
+  .pipe($.if('*.js', $.uglify()))
+  .pipe($.if('*.js', $.sourcemaps.write('.')))
+  .pipe(gulp.dest('dist/scripts'));
 });
 
 gulp.task('babel', () => {
@@ -137,7 +148,7 @@ gulp.task('package', function () {
 gulp.task('build', (cb) => {
   runSequence(
     'lint', 'babel', 'chromeManifest',
-    ['html', 'images', 'css', 'extras'],
+    ['html', 'images', 'css', 'extras', 'js'],
     'size', cb);
 });
 
