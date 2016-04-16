@@ -158,12 +158,36 @@ let asTab = (() => {
 
   chrome.runtime.onInstalled.addListener(function(details) {
     if (details.reason == 'install') {
+      showFirstRunPopup();
       activateOnTwitchTabs();
     } else if (details.reason == 'update') {
       activateOnTwitchTabs();
       var thisVersion = chrome.runtime.getManifest().version;
     }
   });
+
+  let showFirstRunPopup = function() {
+    let popupHeight = 700;
+    let popUpWidth = 600;
+    let windowLeft = Math.round((screen.width - popUpWidth) / 2);
+    let windowTop = Math.round((screen.height - popupHeight) / 2);
+
+    chrome.tabs.create({
+      url: chrome.extension.getURL('firstRun.html'),
+      active: false
+    }, function(tab) {
+      chrome.windows.create({
+        tabId: tab.id,
+        type: 'popup',
+        focused: true,
+        height:popupHeight,
+        width:popUpWidth,
+        top: windowTop,
+        left:windowLeft
+      });
+    });
+  }
+
 
   return asTab;
 })();

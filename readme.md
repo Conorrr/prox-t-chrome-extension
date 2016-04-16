@@ -71,8 +71,8 @@ Step 1
 
 Contact
 -------
-If you have any questions about the extension of the proxy servers or anything really feel free to drop me a message on:
-* on reddit /u/conorrr or /u/prox-t
+prox-t is currently still in beta and I would really appreciate any feedback that you have. If you have any questions about the extension of the proxy servers or anything really feel free to drop me a message:
+* on reddit [/u/conorrr](https://www.reddit.com/message/compose/?to=conorrr) or [/u/prox-t](https://www.reddit.com/message/compose/?to=prox-t)
 * via email proxt AT restall.io
 
 ---
