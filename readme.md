@@ -60,12 +60,10 @@ If you are going to republish this application as a chrome extension please modi
 
 Step 0
 * Install nodejs + npm - [Download here](https://nodejs.org/en/download/)
-* Install gulp and bower - `npm install --global gulp bower`
+* Install gulp - `npm install --global gulp`
 
 Step 1
-* Install project dependencies `npm -i`
-
-* Install babel babel -i
+* Install project dependencies `npm i`
 * run `gulp build`
 * Navigate to `chrome://extensions/` in chrome
 * Check the developer mode checkbox in the top right hand corner
@@ -77,3 +75,6 @@ If you have any questions about the extension of the proxy servers or anything r
 * on reddit /u/conorrr or /u/prox-t
 * via email proxt AT restall.io
 
+---
+
+prox-t is in no way affiliated with Twitch Interactive, Inc.
