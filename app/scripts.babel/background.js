@@ -4,6 +4,7 @@ let asTab = (() => {
   let requestPattern = 'http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
 
   let defaultServer = '';
+  let port = 80;
 
   const enabledIconImage = 'images/Logo_38_active.png';
   const disabledIconImage = 'images/Logo_38.png';
@@ -12,11 +13,10 @@ let asTab = (() => {
   let status = {};
 
   let servers = {
-    'London': 'lon.restall.io:5050',
-    'Miami': 'mia.restall.io:5050',
-    'San Jose': 'svy.restall.io:5050',
-    'Sydney': 'syd.restall.io:5050',
-    'localhost': 'localhost:5050'
+    'London': 'lon.restall.io',
+    'Miami': 'mia.restall.io',
+    'San Jose': 'svy.restall.io',
+    'Sydney': 'syd.restall.io',
   };
 
   let methods = function(tabId) {
@@ -82,7 +82,7 @@ let asTab = (() => {
   }
 
   let buildUrl = function(server, steamerName, params) {
-    return 'http://' + servers[server] + '/init/' + steamerName + '?' + buildParamString(params);
+    return 'http://' + servers[server] + ':' + port + '/init/' + steamerName + '?' + buildParamString(params);
   }
 
   let buildParamString = function(params) {
@@ -166,6 +166,11 @@ let asTab = (() => {
     }
   });
 
+  // override the port number with something different if it's set
+  chrome.storage.local.get('port', (portNum) => {
+    port = portNum.port ? portNum.port : port;
+  });
+
   let showFirstRunPopup = function() {
     let popupHeight = 700;
     let popUpWidth = 600;
@@ -180,10 +185,10 @@ let asTab = (() => {
         tabId: tab.id,
         type: 'popup',
         focused: true,
-        height:popupHeight,
-        width:popUpWidth,
+        height: popupHeight,
+        width: popUpWidth,
         top: windowTop,
-        left:windowLeft
+        left: windowLeft
       });
     });
   }
