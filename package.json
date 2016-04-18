@@ -1,5 +1,5 @@
 {
-  "name": "prox-t-proto-2",
+  "name": "prox-t",
   "private": true,
   "engines": {
     "node": ">=0.8.0"
