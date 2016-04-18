@@ -17,6 +17,7 @@ let asTab = (() => {
     'Miami': 'mia.restall.io',
     'San Jose': 'svy.restall.io',
     'Sydney': 'syd.restall.io',
+    'Tokyo': 'tok.restall.io',
   };
 
   let methods = function(tabId) {
