@@ -6,89 +6,80 @@
     <link href="styles/github-styles.css" rel="stylesheet">
   </head>
   <body>
-  <div class="container markdown-body">
-    <div class="banner"><img src="images/Logo_330.png"></div>
-    <h3><a id="user-content-what-is-prox-t" class="anchor" href="#what-is-prox-t" aria-hidden="true"></a>What is prox-t?</h3>
+    <div class="container markdown-body">
+      <div class="banner"><img src="images/Logo_330.png"></div>
 
-<p>A simple chrome extension that allows users to watch twitch streams via a different regional twitch datacenter instead of the default one that twitch usually assigns them.</p>
+      <h3>What is prox-t?</h3>
+      <p>A simple chrome extension that allows users to watch twitch streams via a different regional twitch datacenter instead of the default one that twitch usually assigns them.</p>
 
-<h3><a id="user-content-why-would-anybody-want-to-do-that" class="anchor" href="#why-would-anybody-want-to-do-that" aria-hidden="true"></a>Why would anybody want to do that?</h3>
+      <h3>Why would anybody want to do that?</h3>
+      <p>Many people have problems maintaining a quick constant connection to their closest twitch data center due to their ISPs bad routing or throttling twitch traffic.</p>
 
-<p>Many people have problems maintaining a quick constant connection to their closest twitch data center due to their ISPs bad routing or throttling twitch traffic.</p>
+      <h3>How it works?</h3>
+      <p>When a stream first starts a request is made to a central twitch server (usher) this server assigns the user a server in a data center close to the users geographical location.  This application works by proxying this single request though a server in a different location to the user. This means that twitch assigns the user a slot in a different data center. Generally the users ISP hasn't throttled traffic to this server.</p>
 
-<h3><a id="user-content-how-it-works" class="anchor" href="#how-it-works" aria-hidden="true"></a>How it works?</h3>
+      <h3>What location should I choose?</h3>
+      <p>For the best results I recommend selecting a server close to you and move further away until it works.</p>
 
-<p>When a stream first starts a request is made to a central twitch server (usher) this server assigns the user a server in a data center close to the users geographical location.  This application works by proxying this single request though a server in a different location to the user. This means that twitch assigns the user a slot in a different data center. Generally the users ISP hasn't throttled traffic to this server.</p>
+      <h3>Will it work for me?</h3>
+      <p>Unfortunately this is hard question to answer. Also the extension currently only solves a couple of very specific problems. If you only experience lag occasionally then it probably wont help you yet.</p>
+      <p>The quickest and most reliable way to tell if it helps is to give it a go.</p>
+      <p>If you want to get an idea of what quality you should be able to watch head over to <a href="http://speedtest.net">speedtest.net</a> run do a speed test and match your speed against the table below.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Speed</th>
+            <th>Quality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3.5Mb+</td>
+            <td>Source*</td>
+          </tr>
+          <tr>
+            <td>1.5Mb</td>
+            <td>High</td>
+          </tr>
+          <tr>
+            <td>750Kb</td>
+            <td>Medium</td>
+          </tr>
+          <tr>
+            <td>550Kb</td>
+            <td>Low</td>
+          </tr>
+          <tr>
+            <td>250Kb</td>
+            <td>Mobile</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The above limits are theoretical you will need to have a connection slightly quicker because connections are generally unstable. Also if you are doing anything else on the internet then you will require a higher speed. </p>
+      <p>*The speed required for Source varies on the bitrate that the broadcaster is streaming at, most popular broadcasters use 3500Kb/s.</p>
 
-<h3><a id="user-content-what-location-should-i-choose" class="anchor" href="#what-location-should-i-choose" aria-hidden="true"></a>What location should I choose?</h3>
+      <h3>I have the extension install and enabled but it still doesn't do anything</h3>
+      <p>Try multiple streams, if that doesn't help the unfortunately the extension in it's current state probably can't help you.</p>
+      <p>There is lots of help out there for people who experience lag. You can try contacting twitch by filling out <a href="https://docs.google.com/forms/d/1Y9ATuT6eCafDWPz5PtJkIImv1TE9q4l6oz-DzRBFQSA/viewform?c=0&amp;w=1">this form</a> sometimes they can spot issues and put pressure on ISPs to sort them.</p>
+      <p>Sometimes the problem is a mixture of an unstable connection and the flash player that twitch use. A solution for this is to use <a href="http://docs.livestreamer.io/#">livestreamer</a>.</p>
 
-<p>For the best results I recommend selecting a server close to you and move further away until it works.</p>
+      <h3>What more is to come?</h3>
+      <p>First I hope to polish off the current functionality, make it easier to use and add some more backend servers to allow users to connect to a wider range of twitch servers.</p>
+      <p>Next I want to add the ability for users to proxy the entire stream through a server not just the first request. This will probably turn out to be quite expensive as it will require me to proxy a lot of traffic.</p>
+      <p>I also want to add the ability to manually set the size of the buffer that twitch uses. I have an idea of how this will work but I need to try it out and see if it's technically possible. If it does it should help people who have unstable but quick connections.</p>
 
-<h3><a id="user-content-will-it-work-for-me" class="anchor" href="#will-it-work-for-me" aria-hidden="true"></a>Will it work for me?</h3>
+      <h3>Contact + Feedback</h3>
+      <p>prox-t is currently still in beta and I would really appreciate any feedback that you have. If you have any questions about the extension of the proxy servers or anything really feel free to drop me a message:</p>
+      <ul>
+        <li>on reddit <a href="https://www.reddit.com/message/compose/?to=conorrr" target="_blank">/u/conorrr</a> or <a href="https://www.reddit.com/message/compose/?to=prox-t" target="_blank">/u/prox-t</a></li>
+        <li>via email <a href="mailto:proxt@restall.io">proxt@restall.io</a></li>
+      </ul>
 
-<p>Unfortunately this is hard question to answer. Also the extension currently only solves a couple of very specific problems. If you only experience lag occasionally then it probably wont help you yet.</p>
+      <h3>License</h3>
+      <p>prox-t is supplied for free under the <a href="https://tldrlegal.com/license/mit-license" target="_blank">MIT License</a>. The source code can be found on <a href="https://github.com/Conorrr/prox-t-chrome-extension" target="_blank">github</a>.</p>
 
-<p>The quickest and most reliable way to tell if it helps is to give it a go.</p>
+      <p>prox-t is in no way affiliated with Twitch Interactive, Inc.</p>
 
-<p>If you want to get an idea of what quality you should be able to watch head over to <a href="http://speedtest.net">speedtest.net</a> run do a speed test and match your speed against the table below.</p>
-
-<table><thead>
-<tr>
-<th>Speed</th>
-<th>Quality</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>3.5Mb+</td>
-<td>Source*</td>
-</tr>
-<tr>
-<td>1.5Mb</td>
-<td>High</td>
-</tr>
-<tr>
-<td>750Kb</td>
-<td>Medium</td>
-</tr>
-<tr>
-<td>550Kb</td>
-<td>Low</td>
-</tr>
-<tr>
-<td>250Kb</td>
-<td>Mobile</td>
-</tr>
-</tbody></table>
-
-<p>The above limits are theoretical you will need to have a connection slightly quicker because connections are generally unstable. Also if you are doing anything else on the internet then you will require a higher speed. </p>
-
-<p>*The speed required for Source varies on the bitrate that the broadcaster is streaming at, most popular broadcasters use 3500Kb/s.</p>
-
-<h3><a id="user-content-i-have-the-extension-install-and-enabled-but-it-still-doesnt-do-anything" class="anchor" href="#i-have-the-extension-install-and-enabled-but-it-still-doesnt-do-anything" aria-hidden="true"></a>I have the extension install and enabled but it still doesn't do anything</h3>
-
-<p>Try multiple streams, if that doesn't help the unfortunately the extension in it's current state probably can't help you.</p>
-
-<p>There is lots of help out there for people who experience lag. You can try contacting twitch by filling out <a href="https://docs.google.com/forms/d/1Y9ATuT6eCafDWPz5PtJkIImv1TE9q4l6oz-DzRBFQSA/viewform?c=0&amp;w=1">this form</a> sometimes they can spot issues and put pressure on ISPs to sort them.</p>
-
-<p>Sometimes the problem is a mixture of an unstable connection and the flash player that twitch use. A solution for this is to use <a href="http://docs.livestreamer.io/#">livestreamer</a>.</p>
-
-<h3><a id="user-content-what-more-is-to-come" class="anchor" href="#what-more-is-to-come" aria-hidden="true"></a>What more is to come?</h3>
-
-<p>First I hope to polish off the current functionality, make it easier to use and add some more backend servers to allow users to connect to a wider range of twitch servers.</p>
-
-<p>Next I want to add the ability for users to proxy the entire stream through a server not just the first request. This will probably turn out to be quite expensive as it will require me to proxy a lot of traffic.</p>
-
-<p>I also want to add the ability to manually set the size of the buffer that twitch uses. I have an idea of how this will work but I need to try it out and see if it's technically possible. If it does it should help people who have unstable but quick connections.</p>
-
-    <h3><a id="user-content-contact-feedback" class="anchor" href="#contact-feedback" aria-hidden="true"></a>Contact + Feedback</h3>
-
-	<p>prox-t is currently still in beta and I would really appreciate any feedback that you have. If you have any questions about the extension of the proxy servers or anything really feel free to drop me a message:</p>
-	<ul>
-		<li>on reddit <a href="https://www.reddit.com/message/compose/?to=conorrr" target="_blank">/u/conorrr</a> or <a href="https://www.reddit.com/message/compose/?to=prox-t" target="_blank">/u/prox-t</a></li>
-		<li>via email <a href="mailto:proxt@restall.io">proxt@restall.io</a></li>
-	</ul>
-    <p>prox-t is in no way affiliated with Twitch Interactive, Inc.</p>
-    
     </div>
     <a class="close">close</a>
     <script src="scripts/firstRun.js"></script>

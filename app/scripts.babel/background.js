@@ -161,6 +161,7 @@ let asTab = (() => {
       showFirstRunPopup();
       activateOnTwitchTabs();
     } else if (details.reason == 'update') {
+      showFirstRunPopup();
       activateOnTwitchTabs();
       var thisVersion = chrome.runtime.getManifest().version;
     }
