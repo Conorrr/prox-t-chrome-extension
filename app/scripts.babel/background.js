@@ -13,11 +13,14 @@ let asTab = (() => {
   let status = {};
 
   let servers = {
+    'Amsterdam': 'ams.restall.io',
     'London': 'lon.restall.io',
     'Miami': 'mia.restall.io',
+    'New York': 'nyc.restall.io',
     'San Jose': 'svy.restall.io',
     'Sydney': 'syd.restall.io',
     'Tokyo': 'tok.restall.io',
+    'Washington': 'atl.restall.io',
   };
 
   let methods = function(tabId) {
