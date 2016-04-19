@@ -155,8 +155,11 @@ let asTab = (() => {
   chrome.webRequest.onBeforeRequest.addListener(callback, filter, opt_extraInfoSpec);
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    if (tab.url.indexOf('https://www.twitch.tv/') == 0 && changeInfo.status == 'complete') {
+    if (tab.url.indexOf('https://www.twitch.tv/') == 0) {
       chrome.pageAction.show(tabId);
+      if (status[tabId] !== undefined && status[tabId].enabled) {
+        changeIcon(tabId, enabledIconImage);
+      }
     }
   });
 
