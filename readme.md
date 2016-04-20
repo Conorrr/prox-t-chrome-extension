@@ -69,6 +69,11 @@ Step 1
 * Check the developer mode checkbox in the top right hand corner
 * Select load unpacked extension and navigate to `dist` in the project directory
 
+Coming Soon
+-----------
+* Ability to manually set buffer
+* Ability to proxy the whole stream
+
 Contact
 -------
 prox-t is currently still in beta and I would really appreciate any feedback that you have. If you have any questions about the extension of the proxy servers or anything really feel free to drop me a message:
