@@ -5,6 +5,10 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import runSequence from 'run-sequence';
 import {stream as wiredep} from 'wiredep';
+import browserify from 'browserify';
+import watchify from 'watchify';
+import source from 'vinyl-source-stream';
+import es from 'event-stream';
 
 const $ = gulpLoadPlugins();
 
@@ -64,10 +68,6 @@ gulp.task('css',  () => {
 gulp.task('html',  () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.sourcemaps.init())
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-    .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
     .pipe(gulp.dest('dist'));
 });
@@ -102,11 +102,21 @@ gulp.task('js', () => {
 });
 
 gulp.task('babel', () => {
-  return gulp.src('app/scripts.babel/**/*.js')
-      .pipe($.babel({
-        presets: ['es2015']
-      }))
-      .pipe(gulp.dest('app/scripts'));
+  var files = ["background.js", "chromereload.js", "firstRun.js", "popup.js"];
+
+  let tasks = files.forEach( (file) => {
+    browserify({
+      entries: ["app/scripts.babel/" + file],
+      cache: {},
+      packageCache: {},
+      plugin: [] // [watchify]
+    })
+    .transform("babelify", {presets: ["es2015"]})
+    .bundle()
+    .pipe(source(file))
+    .pipe(gulp.dest('app/scripts'));
+  });
+  return es.merge.apply(null, tasks);
 });
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
