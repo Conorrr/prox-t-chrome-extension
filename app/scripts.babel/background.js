@@ -4,7 +4,7 @@ import {startWebServer} from './webServer';
 
 startWebServer();
 
-let asTab = (() => {
+{
   let requestPattern = 'http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
 
   let defaultServer = '';
@@ -74,7 +74,7 @@ let asTab = (() => {
     });
   }
 
-  let asTab = (tabId) => {
+  window.asTab = (tabId) => {
     if (!status[tabId]) {
       status[tabId] = {
         enabled: false,
@@ -173,7 +173,7 @@ let asTab = (() => {
       activateOnTwitchTabs();
     } else if (details.reason == 'update') {
       activateOnTwitchTabs();
-      var thisVersion = chrome.runtime.getManifest().version;
+      let thisVersion = chrome.runtime.getManifest().version;
     }
   });
 
@@ -203,7 +203,4 @@ let asTab = (() => {
       });
     });
   }
-
-
-  return asTab;
-})();
+}

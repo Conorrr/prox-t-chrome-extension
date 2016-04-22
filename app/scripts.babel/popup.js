@@ -4,7 +4,6 @@ chrome.tabs.query({
 	active: true,
 	lastFocusedWindow: true
 }, function(tabs) {
-	// Do something with tabs
 	var bg = chrome.extension.getBackgroundPage().asTab(tabs[0].id);
 
 	var redraw = function() {
