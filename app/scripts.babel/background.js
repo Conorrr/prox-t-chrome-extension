@@ -5,7 +5,7 @@ import {startWebServer} from './webServer';
 startWebServer();
 
 {
-  let requestPattern = 'http://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
+  let requestPattern = 'https?://usher\.ttvnw\.net/api/channel/hls/[a-zA-Z0-9_]{4,25}\.m3u8';
 
   let defaultServer = '';
   let port = 80;
