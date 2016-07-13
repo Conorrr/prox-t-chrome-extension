@@ -1,6 +1,6 @@
 {
   "name": "Prox-t Beta",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "manifest_version": 2,
   "description": "Enables users to switch to using a different twitch data center.",
   "icons": {
@@ -24,7 +24,7 @@
     "cookies",
     "storage",
     "*://www.twitch.tv/*",
-    "http://*.ttvnw.net/*"
+    "*://*.ttvnw.net/*"
   ],
   "page_action": {
     "default_icon": {

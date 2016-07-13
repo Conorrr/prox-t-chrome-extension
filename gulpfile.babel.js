@@ -153,7 +153,7 @@ gulp.task('watch', ['lint', 'babel', 'html'], () => {
 gulp.task('size', () => {
   return gulp.src('dist/**/*').pipe($.size({
     title: 'build',
-    gzip: true
+    gzip: false
   }));
 });
 
