@@ -151,7 +151,7 @@ startWebServer();
   }
 
   let filter = {
-    urls: ['http://usher.ttvnw.net/api/channel/hls/*']
+    urls: ['https://usher.ttvnw.net/api/channel/hls/*']
   };
 
   let opt_extraInfoSpec = ['blocking'];
